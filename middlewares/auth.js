@@ -19,8 +19,15 @@ const createToken = (user) => {
 
 // protect routes
 const protect = async (req, res, next) => {
-  // get token from header
-  const token = req.headers.authorization.split(" ")[1];
+  const bearer = req.headers.authorization;
+
+  // if no bearer token
+  if (!bearer || !bearer.startsWith("Bearer")) {
+    return res.status(401).json({ msg: "Unauthorized" });
+  }
+
+  // get token from bearer
+  const token = bearer.split(" ")[1];
 
   // check if no token
   if (!token) {
