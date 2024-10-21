@@ -33,7 +33,7 @@ const userSignup = async (req, res) => {
     // create token
     const token = createToken(user);
 
-    return res.status(201).json({ token });
+    return res.status(201).json({ token , user});
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Server error" });
@@ -65,7 +65,7 @@ const userLogin = async (req, res) => {
     // create token
     const token = createToken(user);
 
-    return res.status(200).json({ token });
+    return res.status(200).json({ token , user});
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Server error" });
