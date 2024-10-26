@@ -4,7 +4,7 @@ const {
   comparePasswords,
 } = require("../middlewares/auth");
 
-const { User } = require("../models/User");
+const User = require("../models/User");
 
 // user signup
 
@@ -33,7 +33,7 @@ const userSignup = async (req, res) => {
     // create token
     const token = createToken(user);
 
-    return res.status(201).json({ token , user});
+    return res.status(201).json({ token, user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Server error" });
@@ -65,7 +65,7 @@ const userLogin = async (req, res) => {
     // create token
     const token = createToken(user);
 
-    return res.status(200).json({ token , user});
+    return res.status(200).json({ token, user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Server error" });
@@ -127,6 +127,20 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+// get user by id
+
+const getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select("-password");
+
+    return res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server error" });
+  }
+}
+
+
 module.exports = {
   userSignup,
   userLogin,
@@ -134,4 +148,5 @@ module.exports = {
   updateUser,
   deleteUser,
   getAllUsers,
+  getUserById,
 };

@@ -6,8 +6,9 @@ const {
   deleteUser,
   getUser,
   userSignup,
-  userSignin,
+  userLogin,
   updateUser,
+  getUserById,
 } = require("../controllers/usersController");
 const router = express.Router();
 
@@ -15,7 +16,7 @@ const router = express.Router();
 router.post("/signup", (req, res) => userSignup(req, res));
 
 // User signin route
-router.post("/signin", (req, res) => userSignin(req, res));
+router.post("/signin", (req, res) => userLogin(req, res));
 
 // update user route
 router.put("/update", protect, updateUser);
@@ -25,6 +26,9 @@ router.get("/profile", protect, getUser);
 
 // get all users route
 router.get("/all", protect, getAllUsers);
+
+// get user by id route
+router.get("/:id", protect, getUserById);
 
 // delete user route
 router.delete("/delete", protect, deleteUser);
