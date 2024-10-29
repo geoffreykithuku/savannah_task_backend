@@ -37,7 +37,9 @@ const protect = async (req, res, next) => {
   // verify token
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
+    // exlude password from user object
+    decoded.password = undefined;
+    
     req.user = decoded;
     next();
   } catch (error) {

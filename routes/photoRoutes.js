@@ -21,7 +21,7 @@ router.get("/all", protect, getPhotos);
 router.get("/:id", protect, getPhotoById);
 
 // Update photo route
-router.put("/update/:id", protect, updatePhoto);
+router.patch("/update/:id", protect, updatePhoto);
 
 // Delete photo route
 router.delete("/delete/:id", protect, deletePhoto);

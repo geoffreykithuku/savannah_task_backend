@@ -2,7 +2,7 @@ const Album = require("../models/Album");
 
 // create album
 
- const createAlbum = async (req, res) => {
+const createAlbum = async (req, res) => {
   try {
     const { userId, title } = req.body;
 
@@ -20,7 +20,7 @@ const Album = require("../models/Album");
 
 // get all albums
 
- const getAlbums = async (req, res) => {
+const getAlbums = async (req, res) => {
   try {
     const albums = await Album.find();
 
@@ -33,7 +33,7 @@ const Album = require("../models/Album");
 
 // get album by id
 
- const getAlbumById = async (req, res) => {
+const getAlbumById = async (req, res) => {
   try {
     const album = await Album.findById(req.params.id);
 
@@ -46,7 +46,7 @@ const Album = require("../models/Album");
 
 // update album
 
- const updateAlbum = async (req, res) => {
+const updateAlbum = async (req, res) => {
   try {
     const album = await Album.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -62,7 +62,7 @@ const Album = require("../models/Album");
 
 // delete album
 
- const deleteAlbum = async (req, res) => {
+const deleteAlbum = async (req, res) => {
   try {
     await Album.findByIdAndDelete(req.params.id);
 
@@ -75,10 +75,10 @@ const Album = require("../models/Album");
 
 // get albums by user
 
- const getAlbumsByUser = async (req, res) => {
-  const user = req.user;
+const getAlbumsByUser = async (req, res) => {
+  const user_id = req.params.userId;
   try {
-    const albums = await Album.find({ userId: user.id });
+    const albums = await Album.find({ userId: user_id });
 
     return res.status(200).json({ albums });
   } catch (error) {
@@ -87,5 +87,11 @@ const Album = require("../models/Album");
   }
 };
 
-
-module.exports = { createAlbum, deleteAlbum, getAlbumById, getAlbums, getAlbumsByUser, updateAlbum };
+module.exports = {
+  createAlbum,
+  deleteAlbum,
+  getAlbumById,
+  getAlbums,
+  getAlbumsByUser,
+  updateAlbum,
+};

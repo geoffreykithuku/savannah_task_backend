@@ -2,7 +2,7 @@ const Photo = require("../models/Photo");
 
 // create photo
 
- const createPhoto = async (req, res) => {
+const createPhoto = async (req, res) => {
   try {
     const { albumId, title, imageUrl } = req.body;
 
@@ -21,7 +21,7 @@ const Photo = require("../models/Photo");
 
 // get all photos
 
- const getPhotos = async (req, res) => {
+const getPhotos = async (req, res) => {
   try {
     const photos = await Photo.find();
 
@@ -34,7 +34,7 @@ const Photo = require("../models/Photo");
 
 // get photo by id
 
- const getPhotoById = async (req, res) => {
+const getPhotoById = async (req, res) => {
   try {
     const photo = await Photo.findById(req.params.id);
 
@@ -47,7 +47,7 @@ const Photo = require("../models/Photo");
 
 // update photo
 
- const updatePhoto = async (req, res) => {
+const updatePhoto = async (req, res) => {
   try {
     const photo = await Photo.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -63,7 +63,7 @@ const Photo = require("../models/Photo");
 
 // delete photo
 
- const deletePhoto = async (req, res) => {
+const deletePhoto = async (req, res) => {
   try {
     await Photo.findByIdAndDelete(req.params.id);
 
@@ -76,7 +76,7 @@ const Photo = require("../models/Photo");
 
 // get photos by album id
 
- const getPhotosByAlbumId = async (req, res) => {
+const getPhotosByAlbumId = async (req, res) => {
   try {
     const photos = await Photo.find({ albumId: req.params.albumId });
 
@@ -87,5 +87,11 @@ const Photo = require("../models/Photo");
   }
 };
 
-
-module.exports = { createPhoto, deletePhoto, getPhotoById, getPhotos, getPhotosByAlbumId, updatePhoto };
+module.exports = {
+  createPhoto,
+  deletePhoto,
+  getPhotoById,
+  getPhotos,
+  getPhotosByAlbumId,
+  updatePhoto,
+};
